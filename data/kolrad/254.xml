@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<yml_catalog date="2021-12-04 02:15">
+    <shop>
+        <name>b2b.kolrad.ru</name>
+        <pages>254</pages>
+        <currencies>
+            <currency id="rur" rate="1"/>
+        </currencies>
+
+        <categories>
+                                                <category id="5" parentId="0">Литые диски</category>
+                                                        <category id="7" parentId="0">Штампованные диски</category>
+                                                        <category id="4" parentId="0">Легкогрузовые диски</category>
+                                                        <category id="1" parentId="0">Грузовые диски</category>
+                                                        <category id="3" parentId="0">Комплектующие</category>
+                                                        <category id="2" parentId="0">Датчики давления CUB</category>
+                                                        <category id="6" parentId="0">Материалы для шиномонтажа</category>
+                                                        <category id="8" parentId="0">Датчики давления Autel</category>
+                                                        </categories>
+
+        <offers>
+                    </offers>
+    </shop>
+</yml_catalog>
