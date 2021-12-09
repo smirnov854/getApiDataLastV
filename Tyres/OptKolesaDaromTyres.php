@@ -21,9 +21,11 @@ class OptKolesaDaromTyres extends Tyres
             $this->database_fields['cae'] = $rim->vendor_code;
             $this->database_fields['amount'] = $rim->countAll;
             $this->database_fields["brand"] = $rim->maker;
+            $this->database_fields["model"] = explode(" ",str_replace($rim->maker,'',explode("R",$rim->name)[0]))[0];
             $this->database_fields["name"] = $rim->name;
             $this->database_fields["price"] = $rim->price;
             $this->database_fields["price_retail"] = $rim->price;
+            $this->database_fields["code"] = $rim->vendor_code;
             $this->add_database();
             $this->clear_value();
         }

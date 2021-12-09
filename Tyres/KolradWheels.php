@@ -36,7 +36,7 @@ class KolradWheels extends Wheels
                 $this->database_fields['source'] = __CLASS__;
                 $this->database_fields["brand"] = htmlentities((string)$product->brand);
                 $this->database_fields["model"] = htmlentities((string)$product->model);
-                $this->database_fields["diameter"] = "R" . htmlentities((string)$product->attributes()->D);
+                $this->database_fields["diameter"] = preg_replace('/[^0-9]/','', htmlentities((string)$product->attributes()->D));
                 $this->database_fields["season"] = htmlentities((string)$product->attributes()->season);
                 $this->database_fields["width"] = htmlentities((string)$product->attributes()->W);
                 $this->database_fields["profile"] = htmlentities((string)$product->attributes()->H);

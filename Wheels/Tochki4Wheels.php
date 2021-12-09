@@ -41,12 +41,13 @@ class Tochki4Wheels extends Wheels
             $this->database_fields["model"] = $rim->model;
             $this->database_fields["type"] = $rim->rim_type;
             $this->database_fields["name"] = $rim->name;
-            $this->database_fields["diameter"] = $rim->diameter;
+            $this->database_fields["diameter"] = preg_replace('/[^0-9]/', '',$rim->diameter);
             $this->database_fields["color"] = $rim->color;
 
             $this->database_fields["pn"] = $rim->bolts_count;
             $this->database_fields["pcd"] = $rim->dia;
-            $this->database_fields["et"] = $rim->et;
+            $this->database_fields["et"] = $rim->height;
+            $this->database_fields["width"] = $rim->width;
             $this->database_fields["price"] = $price;
             $this->database_fields["price_retail"] = $rim->price_sk4_rozn;
             $this->database_fields["photo_url"] = $rim->img_big_pish;

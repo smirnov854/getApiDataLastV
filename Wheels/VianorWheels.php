@@ -22,7 +22,8 @@ class VianorWheels extends Wheels
             $this->database_fields["brand"] = htmlentities((string)$wheel->brand);
             $this->database_fields["model"] = htmlentities((string)$wheel->model);
             $this->database_fields["color"] = htmlentities((string)$wheel->attributes()->color);
-            $this->database_fields["diameter"] = htmlentities((string)$wheel->attributes()->D) . " / " . htmlentities((string)$wheel->attributes()->W);
+            $this->database_fields["diameter"] = preg_replace('/[^0-9]/', '',htmlentities((string)$wheel->attributes()->D));
+            $this->database_fields["width"] = htmlentities((string)$wheel->attributes()->W);
             $this->database_fields["et"] = htmlentities((string)$wheel->attributes()->ET);
             $this->database_fields["pn"] = explode("x", htmlentities((string)$wheel->attributes()->PCD))[0];
             $this->database_fields["pcd"] = explode("x", htmlentities((string)$wheel->attributes()->PCD))[1];

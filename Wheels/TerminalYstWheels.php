@@ -21,11 +21,12 @@ class TerminalYstWheels extends Wheels
             $this->database_fields["model"] = $rim->model;
             $this->database_fields["type"] = $rim->wheelType;
             $this->database_fields["name"] = $rim->name;
-            $this->database_fields["diameter"] = $rim->diametr;
+            $this->database_fields["diameter"] = preg_replace('/[^0-9]/', '',$rim->diametr);
             $this->database_fields["color"] = $rim->color;
 
             $this->database_fields["pn"] = $rim->bolts_count;
-            $this->database_fields["pcd"] = $rim->dia;
+            $this->database_fields["pcd"] = $rim->bolts_spacing;
+            $this->database_fields["dia"] = $rim->dia;
             $this->database_fields["et"] = $rim->et;
             $this->database_fields["price"] = $rim->price;
             $this->database_fields["price_retail"] = $rim->price_recomend_rozn;

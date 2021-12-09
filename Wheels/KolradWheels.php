@@ -75,14 +75,14 @@ class KolradWheels extends Wheels
                             $this->database_fields["color"] = htmlentities((string)$cur_param);
                             break;
                         case "ET":
-                            $this->database_fields["et"] = htmlentities((string)$cur_param);
+                            $this->database_fields["et"] = preg_replace('/[^0-9]/', '',htmlentities((string)$cur_param));
                             break;
                         case "PCD":
                             $this->database_fields["pcd"] = explode("/", htmlentities((string)$cur_param))[1];
-                            $this->database_fields["pn"] = explode("/", htmlentities((string)$cur_param))[0];
+                            $this->database_fields["pn"] = preg_replace('/[^0-9]/', '',explode("/", htmlentities((string)$cur_param))[0]);
                             break;
                         case "D (размер обода)":
-                            $this->database_fields["diameter"] = htmlentities((string)$cur_param);
+                            $this->database_fields["diameter"] = preg_replace('/[^0-9]/', '',htmlentities((string)$cur_param));
                             break;
                             /*
                         case "Код завода":

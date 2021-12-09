@@ -31,7 +31,7 @@ class TreckTyreTyres extends Tyres
 
             $this->database_fields["brand"] = htmlentities((string)$tire->producer);
             $this->database_fields["model"] = htmlentities((string)$tire->model);
-            $this->database_fields["diameter"] = "R" . htmlentities((string)$tire->radius);
+            $this->database_fields["diameter"] = preg_replace('/[^0-9]/','',htmlentities((string)$tire->radius));
             $this->database_fields["load_index"] = htmlentities((string)$tire->li);
             $this->database_fields["speed_index"] = htmlentities((string)$tire->ss);
             $this->database_fields["season"] = htmlentities((string)$tire->season);

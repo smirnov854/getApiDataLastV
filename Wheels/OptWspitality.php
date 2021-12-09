@@ -34,10 +34,11 @@ class OptWspitality extends Wheels
             $this->database_fields["model"] = $row[4];
 
             $this->database_fields["type"] = "легковые";
-            $this->database_fields["diameter"] = $row[10];
+            $this->database_fields["diameter"] = preg_replace('/[^0-9]/', '',$row[10]);
             $this->database_fields["color"] = $row[11];
 
-            $this->database_fields["pcd"] = $row[8];
+            $this->database_fields["pn"] = explode("X",$row[8])[0];
+            $this->database_fields["pcd"] = explode("X",$row[8])[1];
             $this->database_fields["et"] = $row[9];
             $this->database_fields["amount"] = $row[16];
             $this->database_fields["price"] = str_replace(",", "", $row[12]);

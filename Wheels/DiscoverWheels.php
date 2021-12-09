@@ -21,6 +21,7 @@ class DiscoverWheels extends Wheels
             $this->database_fields["brand"] = htmlentities((string)$wheel->brand);
             $this->database_fields["model"] = htmlentities((string)$wheel->model);
             $this->database_fields['cae']=htmlentities((string)$wheel->artikul);
+            $this->database_fields['code']=htmlentities((string)$wheel->code);
             $this->database_fields['amount']=
                 (!empty(htmlentities((string)$wheel->rest_middle)) ? htmlentities((string)$wheel->rest_middle) : 0) +
                 (!empty(htmlentities((string)$wheel->rest_fast)) ? htmlentities((string)$wheel->rest_fast) : 0)+
@@ -31,7 +32,7 @@ class DiscoverWheels extends Wheels
 
 
                 switch(htmlentities((string)$cur_param->attributes()->name)){
-                    case "H/PCD":
+                    case "Диаметр расположения отверстий":
                         $this->database_fields["pcd"] = trim(htmlentities((string)$cur_param));
                         break;
                     case "Цвет":
@@ -49,6 +50,13 @@ class DiscoverWheels extends Wheels
                     case "Тип диска":
                         $this->database_fields["type"] = trim(htmlentities((string)$cur_param));
                         break;
+                    case "Ширина обода":
+                        $this->database_fields["width"] = trim(htmlentities((string)$cur_param));
+                        break;
+                    case "Диаметр ступицы Dia":
+                        $this->database_fields["dia"] = trim(htmlentities((string)$cur_param));
+                        break;
+
                 }
             }
             $this->database_fields["photo_url"] = htmlentities((string)$wheel->picture);

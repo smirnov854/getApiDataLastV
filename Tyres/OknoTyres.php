@@ -23,7 +23,7 @@ class OknoTyres extends Tyres
             $this->database_fields["amount"] = htmlentities((string)$tire->articul);
             $this->database_fields["brand"] = htmlentities((string)$tire->mark);
             $this->database_fields["model"] = htmlentities((string)$tire->model);
-            $this->database_fields["diameter"] = "R" . htmlentities((string)$tire->diameter);
+            $this->database_fields["diameter"] = preg_replace('/[^0-9]/','', htmlentities((string)$tire->diameter));
             $this->database_fields["season"] = htmlentities((string)$tire->season) != 1 ? "S" : "W";
             $this->database_fields["width"] = htmlentities((string)$tire->treadWidth);
             $this->database_fields["profile"] = htmlentities((string)$tire->profileHeight);

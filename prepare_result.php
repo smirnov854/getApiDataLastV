@@ -1,15 +1,17 @@
 <?php
 ini_set("display_errors",1);
+set_time_limit(0);
 error_reporting(E_ALL);
 require_once "./Common/Database_worker.php";
 
 $db = new Database_worker();
-$tyres = $db->do_sql("SELECT * FROM parsing_tyres");
+$tyres = $db->do_sql("SELECT * FROM result_tyres");
 
 $file_handle = fopen("./result/tyres.csv","w");
 $header = [
     "id",
     "source",
+    "search_field",
     "name",
     "type",
     "model",
@@ -20,8 +22,6 @@ $header = [
     "speed_index",
     "pins",
     "runflat",
-    "price",
-    "price_retail",
     "photo_url",
     "season",
     "brand",
@@ -35,6 +35,7 @@ foreach($tyres as $row){
     $arr = [
         "id"=>$row->id,
         "source"=>$row->source,
+        "search_field"=>$row->width."/".$row->profile." R".$row->diameter,
         "name"=>$row->name,
         "type"=>$row->type,
         "model"=>$row->model,
@@ -43,26 +44,25 @@ foreach($tyres as $row){
         "profile"=>$row->profile,
         "load_index"=>$row->load_index,
         "speed_index"=>$row->speed_index,
-        "pins"=>$row->pins,
-        "runflat"=>$row->runflat,
-        "price"=>$row->price,
-        "price_retail"=>$row->price_retail,
+        "pins"=>$row->model_stud,
+        "runflat"=>$row->rof_flag,
         "photo_url"=>$row->photo_url,
         "season"=>$row->season,
         "brand"=>$row->brand,
         "price_edited"=>$row->price_edited,
-        "cae",
-        "amount"
+        "cae"=>$row->cae,
+        "amount"=>$row->amount
     ];
     fputcsv($file_handle,$arr,";",'"');
 }
 fclose($file_handle);
 
 
-$wheels = $db->do_sql("SELECT * FROM parsing_wheels");
+$wheels = $db->do_sql("SELECT * FROM result_wheels");
 $header = [
     "id",
     "source",
+    "search_field",
     "name",
     "model",
     "type",
@@ -71,12 +71,11 @@ $header = [
     "pn",
     "pcd",
     "et",
-    "price",
-    "price_retail",
     "photo_url",
     "brand",
     "price_edited",
     "cae",
+    "width",
     "amount"
 ];
 
@@ -86,6 +85,7 @@ foreach($wheels as $row){
     $arr = [
         "id"=>$row->id,
         "source"=>$row->source,
+        "search_field"=>$row->width." x ".$row->diameter." ET".$row->et,
         "name"=>$row->name,
         "model"=>$row->model,
         "type"=>$row->type,
@@ -94,13 +94,12 @@ foreach($wheels as $row){
         "pn"=>$row->pn,
         "pcd"=>$row->pcd,
         "et"=>$row->et,
-        "price"=>$row->price,
-        "price_retail"=>$row->price_retail,
         "photo_url"=>$row->photo_url,
         "brand"=>$row->brand,
         "price_edited"=>$row->price_edited,
-        "cae",
-        "amount"
+        "cae"=>$row->cae,
+        "width"=>$row->width,
+        "amount"=>$row->amount,
     ];
     fputcsv($file_handle,$arr,";",'"');
 }

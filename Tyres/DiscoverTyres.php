@@ -37,7 +37,7 @@ class DiscoverTyres extends Tyres
                         $this->database_fields["profile"] = trim(htmlentities((string)$cur_param));
                         break;
                     case "Диаметр":
-                        $this->database_fields["diameter"] = trim(htmlentities((string)$cur_param));
+                        $this->database_fields["diameter"] = preg_replace('/[^0-9]/', '', trim(htmlentities((string)$cur_param))); ;
                         break;
                     case "Индекс нагрузки":
                         $this->database_fields["load_index"] = trim(htmlentities((string)$cur_param));

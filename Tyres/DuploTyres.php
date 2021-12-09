@@ -27,7 +27,7 @@ class DuploTyres extends Tyres
             $this->database_fields["amount"] = $tire[20];
             $this->database_fields["brand"] = $tire[5];
             $this->database_fields["model"] = $tire[6];
-            $this->database_fields["diameter"] = $tire[7];
+            $this->database_fields["diameter"] = preg_replace('/[^0-9]/', '', $tire[7]);
 
             $this->database_fields["width"] = $tire[8];
             $this->database_fields["profile"] = $tire[9];

@@ -24,7 +24,7 @@ class VianorTyres extends Tyres
             $this->database_fields["cae"] = htmlentities((string)$tire->attributes()->cae);
             $this->database_fields["code"] = htmlentities((string)$tire->attributes()->code);
             $this->database_fields["model"] = htmlentities((string)$tire->model);
-            $this->database_fields["diameter"] = "R" . htmlentities((string)$tire->attributes()->D);
+            $this->database_fields["diameter"] = preg_replace('/[^0-9]/','',  htmlentities((string)$tire->attributes()->D));
             $this->database_fields["season"] = htmlentities((string)$tire->attributes()->season);
             $this->database_fields["width"] = htmlentities((string)$tire->attributes()->W);
             $this->database_fields["profile"] = htmlentities((string)$tire->attributes()->H);

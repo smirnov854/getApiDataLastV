@@ -39,7 +39,7 @@ class Tochki4Tyres extends Tyres
             $this->database_fields['type'] = $tire->tiretype;
             $this->database_fields["brand"] = $tire->brand;
             $this->database_fields["model"] = $tire->model;
-            $this->database_fields["diameter"] = $tire->diameter;
+            $this->database_fields["diameter"] = preg_replace('/[^0-9]/','', $tire->diameter);
             $this->database_fields["season"] = $tire->season == "Зимняя" ? "W" : "S";
             $this->database_fields["width"] = $tire->width;
             $this->database_fields["profile"] = $tire->height;
