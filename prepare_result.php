@@ -5,7 +5,7 @@ error_reporting(E_ALL);
 require_once "./Common/Database_worker.php";
 
 $db = new Database_worker();
-$tyres = $db->do_sql("SELECT * FROM result_tyres");
+
 
 $file_handle = fopen("./result/tyres.csv","w");
 $header = [
@@ -31,34 +31,41 @@ $header = [
 ];
 
 fputcsv($file_handle,$header,";",'"');
-foreach($tyres as $row){
-    $arr = [
-        "id"=>$row->id,
-        "source"=>$row->source,
-        "search_field"=>$row->width."/".$row->profile." R".$row->diameter,
-        "name"=>$row->name,
-        "type"=>$row->type,
-        "model"=>$row->model,
-        "diameter"=>$row->diameter,
-        "width"=>$row->width,
-        "profile"=>$row->profile,
-        "load_index"=>$row->load_index,
-        "speed_index"=>$row->speed_index,
-        "pins"=>$row->model_stud,
-        "runflat"=>$row->rof_flag,
-        "photo_url"=>$row->photo_url,
-        "season"=>$row->season,
-        "brand"=>$row->brand,
-        "price_edited"=>$row->price_edited,
-        "cae"=>$row->cae,
-        "amount"=>$row->amount
-    ];
-    fputcsv($file_handle,$arr,";",'"');
+
+for($i=0;$i<100000;$i+=500){
+    $tyres = $db->do_sql("SELECT * FROM result_tyres LIMIT 500 OFFSET $i");
+    if(count($tyres) ==0){
+        break;
+    }
+    foreach($tyres as $row){
+        $arr = [
+            "id"=>$row->id,
+            "source"=>$row->source,
+            "search_field"=>$row->width."/".$row->profile." R".$row->diameter,
+            "name"=>$row->name,
+            "type"=>$row->type,
+            "model"=>$row->model,
+            "diameter"=>$row->diameter,
+            "width"=>$row->width,
+            "profile"=>$row->profile,
+            "load_index"=>$row->load_index,
+            "speed_index"=>$row->speed_index,
+            "pins"=>$row->model_stud,
+            "runflat"=>$row->rof_flag,
+            "photo_url"=>$row->photo_url,
+            "season"=>$row->season,
+            "brand"=>$row->brand,
+            "price_edited"=>$row->price_edited,
+            "cae"=>$row->cae,
+            "amount"=>$row->amount
+        ];
+        fputcsv($file_handle,$arr,";",'"');
+    }
 }
+
 fclose($file_handle);
 
 
-$wheels = $db->do_sql("SELECT * FROM result_wheels");
 $header = [
     "id",
     "source",
@@ -81,27 +88,33 @@ $header = [
 
 $file_handle = fopen("./result/wheels.csv","w");
 fputcsv($file_handle,$header,";",'"');
-foreach($wheels as $row){
-    $arr = [
-        "id"=>$row->id,
-        "source"=>$row->source,
-        "search_field"=>$row->width." x ".$row->diameter." ET".$row->et,
-        "name"=>$row->name,
-        "model"=>$row->model,
-        "type"=>$row->type,
-        "diameter"=>$row->diameter,
-        "color"=>$row->color,
-        "pn"=>$row->pn,
-        "pcd"=>$row->pcd,
-        "et"=>$row->et,
-        "photo_url"=>$row->photo_url,
-        "brand"=>$row->brand,
-        "price_edited"=>$row->price_edited,
-        "cae"=>$row->cae,
-        "width"=>$row->width,
-        "amount"=>$row->amount,
-    ];
-    fputcsv($file_handle,$arr,";",'"');
+for($i=0;$i<100000;$i+=500) {
+    $wheels = $db->do_sql("SELECT * FROM result_wheels LIMIT 500 OFFSET $i");
+    if(count($wheels) ==0){
+        break;
+    }
+    foreach ($wheels as $row) {
+        $arr = [
+            "id" => $row->id,
+            "source" => $row->source,
+            "search_field" => $row->width . " x " . $row->diameter . " ET" . $row->et,
+            "name" => $row->name,
+            "model" => $row->model,
+            "type" => $row->type,
+            "diameter" => $row->diameter,
+            "color" => $row->color,
+            "pn" => $row->pn,
+            "pcd" => $row->pcd,
+            "et" => $row->et,
+            "photo_url" => $row->photo_url,
+            "brand" => $row->brand,
+            "price_edited" => $row->price_edited,
+            "cae" => $row->cae,
+            "width" => $row->width,
+            "amount" => $row->amount,
+        ];
+        fputcsv($file_handle, $arr, ";", '"');
+    }
 }
 fclose($file_handle);
 
