@@ -83,7 +83,8 @@ $header = [
     "price_edited",
     "cae",
     "width",
-    "amount"
+    "amount",
+    "dia"
 ];
 
 $file_handle = fopen("./result/wheels.csv","w");
@@ -112,6 +113,7 @@ for($i=0;$i<100000;$i+=500) {
             "cae" => $row->cae,
             "width" => $row->width,
             "amount" => $row->amount,
+            "dia"=>$row->dia
         ];
         fputcsv($file_handle, $arr, ";", '"');
     }
@@ -119,7 +121,7 @@ for($i=0;$i<100000;$i+=500) {
 fclose($file_handle);
 
 
-$sensor = $db->do_sql("SELECT * FROM parsing_sensor");
+$sensor = $db->do_sql("SELECT * FROM parsing_sensor WHERE amount>0");
 $header = [
     "id",
     "source",
@@ -147,14 +149,14 @@ foreach($sensor as $row){
         "price_retail"=>$row->price_retail,
         "photo_url"=>$row->photo_url,
         "price_edited"=>$row->price_edited,
-        "cae",
-        "amount"
+        "cae"=>$row->cae,
+        "amount"=>$row->amount
     ];
     fputcsv($file_handle,$arr,";",'"');
 }
 fclose($file_handle);
 
-$fitting = $db->do_sql("SELECT * FROM parsing_fitting");
+$fitting = $db->do_sql("SELECT * FROM parsing_fitting WHERE amount>0");
 $header = [
     "id",
     "source",
@@ -176,8 +178,8 @@ foreach($fitting as $row){
         "price"=>$row->price,
         "photo_url"=>$row->photo_url,
         "price_edited"=>$row->price_edited,
-        "cae",
-        "amount"
+        "cae"=>$row->cae,
+        "amount"=>$row->amount
     ];
     fputcsv($file_handle,$arr,";",'"');
 }

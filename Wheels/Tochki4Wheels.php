@@ -26,14 +26,10 @@ class Tochki4Wheels extends Wheels
             )
             );
             $amount =
-                !empty($rim->rest_sk4) ? $rim->rest_sk4 :(
-                !empty($rim->rest_sk3) ? $rim->rest_sk3 :
-                    (
-                    !empty($rim->rest_yamka) ? $rim->rest_yamka :(
-                    !empty($rim->rest_mkrs) ? $rim->rest_mkrs : 0
-                    )
-                    )
-                );
+                (!empty($rim->rest_sk4) ? preg_replace('/[^0-9]/','',$rim->rest_sk4) : 0) +
+                (!empty($rim->rest_sk3) ? preg_replace('/[^0-9]/','',$rim->rest_sk3) : 0) +
+                (!empty($rim->rest_yamka) ? preg_replace('/[^0-9]/','',$rim->rest_yamka) : 0) +
+                (!empty($rim->rest_mkrs) ? preg_replace('/[^0-9]/','',$rim->rest_mkrs) : 0);
 
             $this->database_fields['source'] = __CLASS__;
             $this->database_fields['cae'] = $rim->cae;
@@ -47,6 +43,7 @@ class Tochki4Wheels extends Wheels
             $this->database_fields["pn"] = $rim->bolts_count;
             $this->database_fields["pcd"] = $rim->dia;
             $this->database_fields["et"] = $rim->height;
+            $this->database_fields["dia"] = $rim->dia;
             $this->database_fields["width"] = $rim->width;
             $this->database_fields["price"] = $price;
             $this->database_fields["price_retail"] = $rim->price_sk4_rozn;

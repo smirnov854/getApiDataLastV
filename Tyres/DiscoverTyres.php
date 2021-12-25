@@ -48,26 +48,26 @@ class DiscoverTyres extends Tyres
                     case "Сезонность":
                         $season = "";
                         if(trim(htmlentities((string)$cur_param)) == "летние"){
-                            $season = "S";
+                            $season = "1";
                         }
                         if(trim(htmlentities((string)$cur_param)) == "зимние"){
-                            $season = "W";
+                            $season = "2";
                         }
                         $this->database_fields["season"] = $season;
                         break;
                     case "Шипы":
                         $pin = "";
-                        if(trim(htmlentities((string)$cur_param)) == "не Шип"){
-                            $pin = "N";
+                        if(mb_strtolower(trim(htmlentities((string)$cur_param))) == "не шип"){
+                            $pin = "off";
                         }
                         if(trim(htmlentities((string)$cur_param)) == "Шип"){
-                            $pin = "Y";
+                            $pin = "on";
                         }
                         $this->database_fields["pins"] = $pin;
                         break;
                     case "Особенности исполнения модели":
                         if(trim(htmlentities((string)$cur_param)) == "RunFlat"){
-                            $this->database_fields["runflat"] = "Y";
+                            $this->database_fields["runflat"] = "on";
                         }
                         break;
                 }

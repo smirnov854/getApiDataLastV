@@ -17,6 +17,7 @@ class OptWspitality extends Wheels
 
     public function read_from_xls()
     {
+        return;
         require_once "/home/c/cf08116/public_html/downloader/vendor/autoload.php";
         $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($this->file_name);
         $spreadsheet = $spreadsheet->getActiveSheet();

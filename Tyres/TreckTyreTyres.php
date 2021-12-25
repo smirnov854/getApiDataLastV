@@ -34,16 +34,16 @@ class TreckTyreTyres extends Tyres
             $this->database_fields["diameter"] = preg_replace('/[^0-9]/','',htmlentities((string)$tire->radius));
             $this->database_fields["load_index"] = htmlentities((string)$tire->li);
             $this->database_fields["speed_index"] = htmlentities((string)$tire->ss);
-            $this->database_fields["season"] = htmlentities((string)$tire->season);
+            $this->database_fields["season"] = (htmlentities((string)$tire->season) == 'всесезон' ? '3' : ( htmlentities((string)$tire->season =='зима' ? 2 : 1)));
             $this->database_fields["width"] = htmlentities((string)$tire->width);
             $this->database_fields["profile"] = htmlentities((string)$tire->h);
-            $this->database_fields["pins"] = htmlentities((string)$tire->stud);
+            $this->database_fields["pins"] = (htmlentities((string)$tire->stud) == "Y" ? 'on' : 'off');
             $this->database_fields["name"] = htmlentities((string)$tire->name);
 
             if(stripos($this->database_fields["name"],"RunFlat") !== FALSE){
-                $this->database_fields["runflat"] = "Y";
+                $this->database_fields["runflat"] = "on";
             }else{
-                $this->database_fields["runflat"] = "N";
+                $this->database_fields["runflat"] = "off";
             }
 
             $this->database_fields["price"] = htmlentities((string)$tire->price);

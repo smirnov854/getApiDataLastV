@@ -33,6 +33,7 @@ class DuploWheels extends Wheels
             $this->database_fields["pn"] = $wheel[8];
             $this->database_fields["pcd"] = $wheel[9];
             $this->database_fields["et"] = $wheel[11];
+            $this->database_fields["dia"] = $wheel[12];
             $this->database_fields["price"] = $wheel[14];
             $this->database_fields["price_retail"] = $wheel[15];
             $this->database_fields["photo_url"] = $wheel[16];

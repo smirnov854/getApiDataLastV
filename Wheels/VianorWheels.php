@@ -25,6 +25,7 @@ class VianorWheels extends Wheels
             $this->database_fields["diameter"] = preg_replace('/[^0-9]/', '',htmlentities((string)$wheel->attributes()->D));
             $this->database_fields["width"] = htmlentities((string)$wheel->attributes()->W);
             $this->database_fields["et"] = htmlentities((string)$wheel->attributes()->ET);
+            $this->database_fields["dia"] = htmlentities((string)$wheel->attributes()->hole);
             $this->database_fields["pn"] = explode("x", htmlentities((string)$wheel->attributes()->PCD))[0];
             $this->database_fields["pcd"] = explode("x", htmlentities((string)$wheel->attributes()->PCD))[1];
 
@@ -36,7 +37,10 @@ class VianorWheels extends Wheels
     public function parse_amounts(){
         $sql = "UPDATE parsing_wheels pt
                 LEFT JOIN parsing_vianor_tmp tmp ON tmp.code=pt.code
-                SET pt.amount=tmp.amount, pt.price=tmp.price";
+                SET pt.amount=tmp.amount, pt.price=tmp.price
+                WHERE source LIKE 'VianorWheels'";
         @$this->do_sql($sql);
     }
+
+
 }

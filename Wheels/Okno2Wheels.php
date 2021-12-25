@@ -31,9 +31,6 @@ class Okno2Wheels extends Wheels
             $this->database_fields['code'] = htmlentities((string)$wheel->articul);
             $this->database_fields['amount'] = htmlentities((string)$wheel->quality);
 
-
-
-
             $this->add_database();
             $this->clear_value();
         }

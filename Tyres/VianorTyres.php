@@ -25,13 +25,13 @@ class VianorTyres extends Tyres
             $this->database_fields["code"] = htmlentities((string)$tire->attributes()->code);
             $this->database_fields["model"] = htmlentities((string)$tire->model);
             $this->database_fields["diameter"] = preg_replace('/[^0-9]/','',  htmlentities((string)$tire->attributes()->D));
-            $this->database_fields["season"] = htmlentities((string)$tire->attributes()->season);
+            $this->database_fields["season"] = (htmlentities((string)$tire->attributes()->season) == "W" ? 2 : 1);
             $this->database_fields["width"] = htmlentities((string)$tire->attributes()->W);
             $this->database_fields["profile"] = htmlentities((string)$tire->attributes()->H);
             $this->database_fields["speed_index"] = htmlentities((string)$tire->attributes()->SI);
             $this->database_fields["load_index"] = htmlentities((string)$tire->attributes()->LI);
-            $this->database_fields["pins"] = htmlentities((string)$tire->attributes()->stud);
-            $this->database_fields["runflat"] = htmlentities((string)$tire->attributes()->run_flat) == "true" ? "Y" : "N";
+            $this->database_fields["pins"] = (htmlentities((string)$tire->attributes()->stud) == 'N' ? 'off' : 'on');
+            $this->database_fields["runflat"] = htmlentities((string)$tire->attributes()->run_flat) == "true" ? "on" : "off";
             $this->add_database();
             $this->clear_value();
         }
@@ -53,8 +53,9 @@ class VianorTyres extends Tyres
             @$this->insert("parsing_vianor_tmp",$insert_arr);
         }
         $sql = "UPDATE parsing_tyres pt
-                LEFT JOIN parsing_vianor_tmp tmp ON tmp.code=pt.code
-                SET pt.amount=tmp.amount, pt.price=tmp.price";
+                LEFT JOIN parsing_vianor_tmp tmp ON tmp.code=pt.code 
+                SET pt.amount=tmp.amount, pt.price=tmp.price 
+                WHERE pt.source LIKE 'VianorTyres'";
         @$this->do_sql($sql);
     }
 }

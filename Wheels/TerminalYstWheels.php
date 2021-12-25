@@ -9,7 +9,8 @@ class TerminalYstWheels extends Wheels
         file_put_contents("/home/c/cf08116/public_html/downloader/data/terminal_yst/wheels.json", file_get_contents($wheels));
     }
 
-    public function read_from_json() {
+    public function read_from_json()
+    {
         $file_handle = fopen($this->file_name, "r");
         $file_content = fread($file_handle, filesize($this->file_name));
         $json = json_decode($file_content);
@@ -21,8 +22,10 @@ class TerminalYstWheels extends Wheels
             $this->database_fields["model"] = $rim->model;
             $this->database_fields["type"] = $rim->wheelType;
             $this->database_fields["name"] = $rim->name;
-            $this->database_fields["diameter"] = preg_replace('/[^0-9]/', '',$rim->diametr);
+            $this->database_fields["diameter"] = preg_replace('/[^0-9]/', '', $rim->diametr);
             $this->database_fields["color"] = $rim->color;
+            $this->database_fields["width"] = $rim->width;
+
 
             $this->database_fields["pn"] = $rim->bolts_count;
             $this->database_fields["pcd"] = $rim->bolts_spacing;
@@ -31,7 +34,7 @@ class TerminalYstWheels extends Wheels
             $this->database_fields["price"] = $rim->price;
             $this->database_fields["price_retail"] = $rim->price_recomend_rozn;
             $this->database_fields["photo_url"] = $rim->picture;
-            $this->database_fields["amount"] = $rim->restmsk;
+            $this->database_fields["amount"] = $rim->restmsk + $rim->restyar + $rim->restspb + $rim->restekb + $rim->restrnd;
             $this->add_database();
             $this->clear_value();
         }

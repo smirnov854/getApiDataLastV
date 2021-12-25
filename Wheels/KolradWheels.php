@@ -84,6 +84,12 @@ class KolradWheels extends Wheels
                         case "D (размер обода)":
                             $this->database_fields["diameter"] = preg_replace('/[^0-9]/', '',htmlentities((string)$cur_param));
                             break;
+                        case "DIA":
+                            $this->database_fields["dia"] = str_replace("d-","",htmlentities((string)$cur_param));
+                            break;
+                        case "LZ (ширина обода)":
+                            $this->database_fields["width"] = htmlentities((string)$cur_param);
+                            break;
                             /*
                         case "Код завода":
                             $this->database_fields["cae"] = htmlentities((string)$cur_param);
